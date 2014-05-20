@@ -1,0 +1,8 @@
+- hosts: vagrant
+  sudo: true
+  user: vagrant
+
+  roles:
+    - upgrade-server
+    - common
+    - groonga-ppa

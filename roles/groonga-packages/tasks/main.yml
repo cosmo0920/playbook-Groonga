@@ -1,0 +1,11 @@
+- name: install groonga
+  apt: name=groonga update_cache=yes
+
+- name: install groonga-tokenizer-mecab
+  apt: name=groonga-tokenizer-mecab update_cache=yes
+
+- name: install groonga-munin-plugins
+  apt: name=groonga-munin-plugins update_cache=yes
+
+- name: install groonga-normalizer-mysql
+  apt: name=groonga-normalizer-mysql update_cache=yes

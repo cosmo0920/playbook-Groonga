@@ -1,0 +1,2 @@
+- name: install software-properties-common
+  apt: name=software-properties-common update_cache=yes
