@@ -1,21 +1,3 @@
-GIT
-  remote: git@github.com:cosmo0920/serverspec.git
-  revision: d036c504420637e415c695df511b82ff7ffba887
-  branch: add-ubuntu-ppa
-  specs:
-    serverspec (1.6.0)
-      highline
-      net-ssh
-      rspec (~> 2.13)
-      specinfra (~> 1.11)
-
-GIT
-  remote: git@github.com:cosmo0920/specinfra.git
-  revision: 570ef08ef2e561525382af1309864b80d585e6d6
-  branch: add-ppa-repo-check-methods
-  specs:
-    specinfra (1.12.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,10 +12,15 @@ GEM
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.6)
+    serverspec (1.7.0)
+      highline
+      net-ssh
+      rspec (~> 2.13)
+      specinfra (~> 1.13)
+    specinfra (1.13.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  serverspec!
-  specinfra!
+  serverspec
