@@ -6,12 +6,23 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "Trusty"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.vm.box = "Trusty"
+    ubuntu.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+    ubuntu.vm.network "forwarded_port", guest: 80, host: 8080
 
-  config.vm.network "private_network", ip: "192.168.30.100"
+    ubuntu.vm.network "private_network", ip: "192.168.30.100"
+  end
+
+  config.vm.define :centos do |centos|
+    centos.vm.box = "CentOS65"
+    centos.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.1/centos65-x86_64-20131205.box"
+
+    centos.vm.network "forwarded_port", guest: 80, host: 8081
+
+    centos.vm.network "private_network", ip: "192.168.30.101"
+  end
 
   config.ssh.forward_agent = true
 
@@ -22,9 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
-  config.vm.provision :ansible do |ansible|
-    ansible.limit = 'all'
-    ansible.playbook = "site.yml"
-    ansible.inventory_path = "hosts"
-  end
+  # config.vm.provision :ansible do |ansible|
+  #   ansible.limit = 'all'
+  #   ansible.playbook = "site.yml"
+  #   ansible.inventory_path = "hosts"
+  # end
 end
