@@ -8,6 +8,7 @@ Ansible playbook for installing Groonga and its related packages.
 ## Platform
 
 * Ubuntu 14.04 LTS(Trusty Tahr)
+* CentOS 6.5
 
 ### LICENSE
 
