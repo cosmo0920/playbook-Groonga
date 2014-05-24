@@ -1,0 +1,7 @@
+- name: add Groonga ppa repo
+  apt_repository: repo='ppa:groonga/ppa'
+  when: ansible_os_family == 'Debian'
+
+- name: install the groonga repo rpm from a remote repo
+  yum: name=http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm state=present
+  when: ansible_os_family == 'RedHat'
