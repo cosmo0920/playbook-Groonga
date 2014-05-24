@@ -1,0 +1,4 @@
+---
+dependencies:
+  - { role: mecab-dictionary/redhat, when: "ansible_os_family == 'RedHat'" }
+  - { role: mecab-dictionary/ubuntu, when: "ansible_os_family == 'Debian'" }
