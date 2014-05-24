@@ -1,2 +1,0 @@
-- name: add Groonga ppa repo
-  apt_repository: repo='ppa:groonga/ppa'

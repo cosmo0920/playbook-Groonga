@@ -1,0 +1,2 @@
+- name: install the groonga repo rpm from a remote repo
+  yum: name=http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm state=present

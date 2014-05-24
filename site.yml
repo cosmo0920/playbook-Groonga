@@ -5,5 +5,5 @@
   roles:
     - upgrade-server
     - common
-    - groonga-ppa
+    - groonga-repo
     - groonga-packages

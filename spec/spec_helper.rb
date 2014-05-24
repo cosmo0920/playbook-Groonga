@@ -19,28 +19,28 @@ RSpec.configure do |c|
     else
       file = block.source_location.first
     end
-    host  = File.basename(Pathname.new(file).dirname)
+    host = ENV['TARGET_HOST']
     if c.host != host
       c.ssh.close if c.ssh
-      c.host  = host
+      c.host = host
       options = Net::SSH::Config.for(c.host)
-      user    = options[:user] || Etc.getlogin
-      vagrant_up = `vagrant up default`
-      config = `vagrant ssh-config default`
+      user = options[:user] || Etc.getlogin
+      vagrant_up = `vagrant up #{c.host}`
+      config = `vagrant ssh-config #{c.host}`
       if config != ''
         config.each_line do |line|
           if match = /HostName (.*)/.match(line)
             host = match[1]
-          elsif  match = /User (.*)/.match(line)
+          elsif match = /User (.*)/.match(line)
             user = match[1]
           elsif match = /IdentityFile (.*)/.match(line)
-            options[:keys] =  [match[1].gsub(/"/,'')]
+            options[:keys] = [match[1].gsub(/"/,'')]
           elsif match = /Port (.*)/.match(line)
             options[:port] = match[1]
           end
         end
       end
-      c.ssh   = Net::SSH.start(host, user, options)
+      c.ssh = Net::SSH.start(host, user, options)
     end
   end
 end
