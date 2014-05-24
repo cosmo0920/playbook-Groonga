@@ -6,6 +6,11 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  def default_provisioner(conf)
+    conf.limit = 'all'
+    conf.playbook = "site.yml"
+  end
+
   config.vm.define :ubuntu do |ubuntu|
     ubuntu.vm.box = "Trusty"
     ubuntu.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
@@ -14,8 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     ubuntu.vm.network "private_network", ip: "192.168.30.100"
     ubuntu.vm.provision :ansible do |ansible|
-      ansible.limit = 'all'
-      ansible.playbook = "site.yml"
+      default_provisioner(ansible)
       ansible.inventory_path = "ubuntu.box"
     end
   end
@@ -28,8 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     centos.vm.network "private_network", ip: "192.168.30.101"
     centos.vm.provision :ansible do |ansible|
-      ansible.limit = 'all'
-      ansible.playbook = "site.yml"
+      default_provisioner(ansible)
       ansible.inventory_path = "centos.box"
     end
   end
