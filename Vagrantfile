@@ -13,6 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.network "forwarded_port", guest: 80, host: 8080
 
     ubuntu.vm.network "private_network", ip: "192.168.30.100"
+    ubuntu.vm.provision :ansible do |ansible|
+      ansible.limit = 'all'
+      ansible.playbook = "site.yml"
+      ansible.inventory_path = "hosts"
+    end
   end
 
   config.vm.define :centos do |centos|
