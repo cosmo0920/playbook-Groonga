@@ -12,9 +12,35 @@ RSpec.configure do |c|
   else
     c.sudo_password = ENV['SUDO_PASSWORD']
   end
-  c.host = ENV['TARGET_HOST']
-  options = Net::SSH::Config.for(c.host)
-  user = options[:user] || Etc.getlogin
-  c.ssh = Net::SSH.start(c.host, user, options)
-  c.os = backend(Serverspec::Commands::Base).check_os
+  c.before :all do
+    block = self.class.metadata[:example_group_block]
+    if RUBY_VERSION.start_with?('1.8')
+      file = block.to_s.match(/.*@(.*):[0-9]+>/)[1]
+    else
+      file = block.source_location.first
+    end
+    host = ENV['TARGET_HOST']
+    if c.host != host
+      c.ssh.close if c.ssh
+      c.host = host
+      options = Net::SSH::Config.for(c.host)
+      user = options[:user] || Etc.getlogin
+      vagrant_up = `vagrant up #{c.host}`
+      config = `vagrant ssh-config #{c.host}`
+      if config != ''
+        config.each_line do |line|
+          if match = /HostName (.*)/.match(line)
+            host = match[1]
+          elsif match = /User (.*)/.match(line)
+            user = match[1]
+          elsif match = /IdentityFile (.*)/.match(line)
+            options[:keys] = [match[1].gsub(/"/,'')]
+          elsif match = /Port (.*)/.match(line)
+            options[:port] = match[1]
+          end
+        end
+      end
+      c.ssh = Net::SSH.start(host, user, options)
+    end
+  end
 end
