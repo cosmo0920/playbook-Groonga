@@ -1,0 +1,11 @@
+- name: install groonga
+  yum: name=groonga state=latest
+
+- name: install groonga-tokenizer-mecab
+  yum: name=groonga-tokenizer-mecab state=latest
+
+- name: install groonga-munin-plugins
+  yum: name=groonga-munin-plugins state=latest
+
+- name: install groonga-normalizer-mysql
+  yum: name=groonga-normalizer-mysql state=latest
