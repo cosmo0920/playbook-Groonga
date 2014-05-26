@@ -1,2 +1,5 @@
+- name: install redhat-lsb
+  yum: name=redhat-lsb state=latest
+
 - name: upgrade all packages
   yum: name=* state=latest

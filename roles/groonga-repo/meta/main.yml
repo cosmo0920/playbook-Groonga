@@ -1,4 +1,5 @@
 ---
 dependencies:
-  - { role: groonga-repo/redhat, when: "ansible_os_family == 'RedHat'" }
-  - { role: groonga-repo/ubuntu, when: "ansible_os_family == 'Debian'" }
+  - { role: groonga-repo/redhat, when: ansible_os_family == 'RedHat' and ansible_lsb.major_release|int == 6 }
+  - { role: groonga-repo/fedora, when: ansible_os_family == 'RedHat' and ansible_lsb.major_release|int == 20 }
+  - { role: groonga-repo/ubuntu, when: ansible_os_family == 'Debian' }

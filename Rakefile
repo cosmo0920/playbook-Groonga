@@ -10,6 +10,10 @@ hosts = [
     :name => 'centos',
     :roles => %w( yumrepo groonga mecab-dictionary ),
   },
+  {
+    :name => 'fedora',
+    :roles => %w( fedorarepo groonga mecab-dictionary ),
+  },
 ]
 
 hosts = hosts.map do |host|

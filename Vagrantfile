@@ -37,6 +37,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define :fedora do |fedora|
+    fedora.vm.box = "Fedora20"
+    fedora.vm.box_url = "https://dl.dropboxusercontent.com/u/15733306/vagrant/fedora-20-netinst-2014_01_05-minimal-puppet-guestadditions.box"
+
+    fedora.vm.network "forwarded_port", guest: 80, host: 8082
+
+    fedora.vm.network "private_network", ip: "192.168.30.102"
+    fedora.vm.provision :ansible do |ansible|
+      default_provisioner(ansible)
+      ansible.inventory_path = "fedora.box"
+    end
+  end
+
   config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |vb|
