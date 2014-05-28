@@ -17,7 +17,7 @@ GEM
       net-ssh
       rspec (~> 2.13)
       specinfra (~> 1.13)
-    specinfra (1.13.0)
+    specinfra (1.13.1)
 
 PLATFORMS
   ruby
