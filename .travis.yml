@@ -10,3 +10,4 @@ install:
 script:
   - ansible-playbook -i ubuntu.box site.yml --syntax-check
   - ansible-playbook -i centos.box site.yml --syntax-check
+  - ansible-playbook -i fedora.box site.yml --syntax-check
