@@ -4,7 +4,7 @@ require 'rspec/core/rake_task'
 hosts = [
   {
     :name => 'ubuntu',
-    :roles => %w( ubuntu-common ppa groonga mecab-dictionary ),
+    :roles => %w( ubuntu-common ppa groonga mecab-dictionary-ubuntu ),
   },
   {
     :name => 'centos',
