@@ -11,7 +11,7 @@ describe yumrepo('groonga') do
   it { should exist }
   it { should be_enabled }
 
-  before :all do
+  after :all do
     RSpec.configure do |c|
       c.disable_sudo = false
     end
