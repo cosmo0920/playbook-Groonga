@@ -24,6 +24,8 @@ hosts = hosts.map do |host|
   }
 end
 
+task :default => :serverspec
+
 desc "Run serverspec to all hosts"
 task :serverspec => 'serverspec:all'
 
