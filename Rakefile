@@ -24,13 +24,13 @@ hosts = hosts.map do |host|
   }
 end
 
-task :default => :serverspec
+task :default => :spec
 
 desc "Run serverspec to all hosts"
-task :serverspec => 'serverspec:all'
+task :spec => 'spec:all'
 
-namespace :serverspec do
-  task :all => hosts.map {|h| 'serverspec:' + h[:short_name] }
+namespace :spec do
+  task :all => hosts.map {|h| 'spec:' + h[:short_name] }
   hosts.each do |host|
     desc "Run serverspec to #{host[:name]}"
     RSpec::Core::RakeTask.new(host[:short_name].to_sym) do |t|
