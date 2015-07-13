@@ -7,3 +7,4 @@
     - common
     - groonga-repo
     - groonga-packages
+    - mecab-dictionary
